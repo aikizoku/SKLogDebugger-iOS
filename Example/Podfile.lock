@@ -1,0 +1,16 @@
+PODS:
+  - SKLogDebugger (0.1.0)
+
+DEPENDENCIES:
+  - SKLogDebugger (from `../`)
+
+EXTERNAL SOURCES:
+  SKLogDebugger:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SKLogDebugger: bbe9772b237c19404dd9f041d17e3f0013f359f2
+
+PODFILE CHECKSUM: f1b882a30fb0abd4cbe61a147d7240c5e2fb166f
+
+COCOAPODS: 1.2.1

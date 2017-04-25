@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SKLogDebugger_Example' do
+  pod 'SKLogDebugger', :path => '../'
+
+  target 'SKLogDebugger_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

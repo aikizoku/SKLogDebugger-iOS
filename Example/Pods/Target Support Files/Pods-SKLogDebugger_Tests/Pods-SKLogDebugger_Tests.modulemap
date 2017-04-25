@@ -1,0 +1,6 @@
+framework module Pods_SKLogDebugger_Tests {
+  umbrella header "Pods-SKLogDebugger_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
