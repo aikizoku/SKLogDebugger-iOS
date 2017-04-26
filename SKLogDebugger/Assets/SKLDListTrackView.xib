@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SKLDListTrackView" customModule="SKLogDebugger" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="Fbw-4s-bvk" id="zed-Wg-c2J"/>
+                <outlet property="tableView" destination="xXt-8h-GCG" id="5FC-0j-ncN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Fbw-4s-bvk">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xXt-8h-GCG">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="l5N-Td-ccZ"/>
+                        <outlet property="delegate" destination="-1" id="jmp-qM-8yn"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="xXt-8h-GCG" firstAttribute="leading" secondItem="Fbw-4s-bvk" secondAttribute="leading" id="73V-PA-kJK"/>
+                <constraint firstAttribute="bottom" secondItem="xXt-8h-GCG" secondAttribute="bottom" id="b4T-gA-ru5"/>
+                <constraint firstAttribute="trailing" secondItem="xXt-8h-GCG" secondAttribute="trailing" id="jdZ-Pw-Xfo"/>
+                <constraint firstItem="xXt-8h-GCG" firstAttribute="top" secondItem="Fbw-4s-bvk" secondAttribute="top" id="w0F-uQ-NMP"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="24" y="7"/>
+        </view>
+    </objects>
+</document>

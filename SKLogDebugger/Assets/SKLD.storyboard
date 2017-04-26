@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Setting View Controller-->
+        <scene sceneID="vFy-pR-Lik">
+            <objects>
+                <viewController storyboardIdentifier="SKLDSettingViewController" id="EF7-bt-9xA" customClass="SKLDSettingViewController" customModule="SKLogDebuggerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R1l-aW-FJu"/>
+                        <viewControllerLayoutGuide type="bottom" id="4vD-sF-Gmo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JVL-ty-fe8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7Fs-Xb-abZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SKLDSwitchCell" id="oDK-Pq-kqd" customClass="SKLDSwitchCell" customModule="SKLogDebuggerDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDK-Pq-kqd" id="30Q-am-aiv">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWo-Dg-bP8">
+                                                    <rect key="frame" x="316" y="6" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="cWo-Dg-bP8" secondAttribute="trailing" constant="10" id="J0e-a8-PBh"/>
+                                                <constraint firstItem="cWo-Dg-bP8" firstAttribute="centerY" secondItem="30Q-am-aiv" secondAttribute="centerY" id="Yxl-fG-7Tu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="switchView" destination="cWo-Dg-bP8" id="YUx-VL-5Hj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="EF7-bt-9xA" id="W0C-tF-29R"/>
+                                    <outlet property="delegate" destination="EF7-bt-9xA" id="D4V-AE-AS1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Fs-Xb-abZ" firstAttribute="top" secondItem="JVL-ty-fe8" secondAttribute="top" id="QpC-Pj-QeJ"/>
+                            <constraint firstAttribute="trailing" secondItem="7Fs-Xb-abZ" secondAttribute="trailing" id="cEz-Q4-uHs"/>
+                            <constraint firstItem="4vD-sF-Gmo" firstAttribute="top" secondItem="7Fs-Xb-abZ" secondAttribute="bottom" id="uTp-EU-ez3"/>
+                            <constraint firstItem="7Fs-Xb-abZ" firstAttribute="leading" secondItem="JVL-ty-fe8" secondAttribute="leading" id="xEJ-av-Tdj"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="7Fs-Xb-abZ" id="wdU-iw-a2e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mnd-KY-Hx1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="31" y="115"/>
+        </scene>
+        <!--List View Controller-->
+        <scene sceneID="HZI-jY-8bU">
+            <objects>
+                <viewController storyboardIdentifier="SKLDListViewController" id="uMT-dF-uCy" customClass="SKLDListViewController" customModule="SKLogDebuggerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ntr-gP-yz9"/>
+                        <viewControllerLayoutGuide type="bottom" id="XD8-DK-7QD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yNK-cP-vy2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vRQ-oV-Nba">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WDL-3z-pfW">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="uMT-dF-uCy" id="GYu-TD-gHb"/>
+                                    <outlet property="delegate" destination="uMT-dF-uCy" id="A2m-yY-27y"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XD8-DK-7QD" firstAttribute="top" secondItem="WDL-3z-pfW" secondAttribute="bottom" id="D6p-Tg-SRk"/>
+                            <constraint firstAttribute="trailing" secondItem="WDL-3z-pfW" secondAttribute="trailing" id="I50-yw-LjZ"/>
+                            <constraint firstAttribute="trailing" secondItem="vRQ-oV-Nba" secondAttribute="trailing" id="KfX-7s-LfQ"/>
+                            <constraint firstItem="WDL-3z-pfW" firstAttribute="leading" secondItem="yNK-cP-vy2" secondAttribute="leading" id="QDA-c2-84o"/>
+                            <constraint firstItem="WDL-3z-pfW" firstAttribute="top" secondItem="vRQ-oV-Nba" secondAttribute="bottom" id="dkJ-WC-d8k"/>
+                            <constraint firstItem="vRQ-oV-Nba" firstAttribute="top" secondItem="Ntr-gP-yz9" secondAttribute="bottom" id="eyI-PZ-qXi"/>
+                            <constraint firstItem="vRQ-oV-Nba" firstAttribute="leading" secondItem="yNK-cP-vy2" secondAttribute="leading" id="i4N-EE-oDX"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="searchBar" destination="vRQ-oV-Nba" id="cqt-5s-14n"/>
+                        <outlet property="tableView" destination="WDL-3z-pfW" id="FzD-vy-8n3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eAu-3f-cdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="687" y="115"/>
+        </scene>
+    </scenes>
+</document>
