@@ -1,25 +1,146 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yet-e9-M1i">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <scene sceneID="IdU-bu-H9T">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yet-e9-M1i" customClass="ViewController" customModule="SKLogDebuggerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="1a2-Te-qoT"/>
+                        <viewControllerLayoutGuide type="bottom" id="94R-Ql-kC2"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <view key="view" contentMode="scaleToFill" id="Fle-8J-t3S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKLogDebugger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evy-EJ-nD5">
+                                <rect key="frame" x="20" y="40" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMa-Zm-D3N">
+                                <rect key="frame" x="0.0" y="66" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="InM-ni-VsZ"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UI7-nU-Uvu">
+                                <rect key="frame" x="20" y="82" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="oxI-ZO-T3c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="open setting"/>
+                                <connections>
+                                    <action selector="onPushOpenSetting:" destination="yet-e9-M1i" eventType="touchUpInside" id="cIN-DZ-fc9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhU-o6-lZy">
+                                <rect key="frame" x="20" y="162" width="335" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMJ-Wv-pzo">
+                                <rect key="frame" x="0.0" y="188" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="6UL-Ih-mde"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MW0-EQ-sWX">
+                                <rect key="frame" x="20" y="204" width="101.5" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="add log 1"/>
+                                <connections>
+                                    <action selector="onPushAddLog1:" destination="yet-e9-M1i" eventType="touchUpInside" id="7A0-Hl-EFW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOZ-IZ-mia">
+                                <rect key="frame" x="136.5" y="204" width="102" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="add log 2"/>
+                                <connections>
+                                    <action selector="onPushAddLog2:" destination="yet-e9-M1i" eventType="touchUpInside" id="qkn-LC-T7n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4H-il-fkw">
+                                <rect key="frame" x="253.5" y="204" width="101.5" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="add log 3"/>
+                                <connections>
+                                    <action selector="onPushAddLog3:" destination="yet-e9-M1i" eventType="touchUpInside" id="0an-gT-tmD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-R7-R8n">
+                                <rect key="frame" x="20" y="249" width="160" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="add log (omit) 1"/>
+                                <connections>
+                                    <action selector="onPushAddOmitLog1:" destination="yet-e9-M1i" eventType="touchUpInside" id="lBH-ek-dwK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f00-MH-mBi">
+                                <rect key="frame" x="195" y="249" width="160" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="add log (omit) 2"/>
+                                <connections>
+                                    <action selector="onPushAddOmitLog2:" destination="yet-e9-M1i" eventType="touchUpInside" id="MHA-62-9aj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JMJ-Wv-pzo" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" id="4QS-XS-tvJ"/>
+                            <constraint firstAttribute="trailing" secondItem="JMJ-Wv-pzo" secondAttribute="trailing" id="4fb-BO-i7c"/>
+                            <constraint firstItem="f00-MH-mBi" firstAttribute="width" secondItem="AKf-R7-R8n" secondAttribute="width" id="5VJ-8j-kmA"/>
+                            <constraint firstItem="UI7-nU-Uvu" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" constant="20" id="77Q-Jh-7AW"/>
+                            <constraint firstAttribute="trailing" secondItem="O4H-il-fkw" secondAttribute="trailing" constant="20" id="Cc4-i6-M3X"/>
+                            <constraint firstItem="nMa-Zm-D3N" firstAttribute="top" secondItem="evy-EJ-nD5" secondAttribute="bottom" constant="5" id="EOj-8V-Rf5"/>
+                            <constraint firstItem="AKf-R7-R8n" firstAttribute="top" secondItem="aOZ-IZ-mia" secondAttribute="bottom" constant="15" id="Fnh-Rl-hAn"/>
+                            <constraint firstItem="MW0-EQ-sWX" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" constant="20" id="Go6-Ie-fNv"/>
+                            <constraint firstAttribute="trailing" secondItem="evy-EJ-nD5" secondAttribute="trailing" constant="20" id="Jyv-2M-eHn"/>
+                            <constraint firstAttribute="trailing" secondItem="MhU-o6-lZy" secondAttribute="trailing" constant="20" id="MDs-nf-zKI"/>
+                            <constraint firstItem="UI7-nU-Uvu" firstAttribute="top" secondItem="nMa-Zm-D3N" secondAttribute="bottom" constant="15" id="Qzq-GC-VxB"/>
+                            <constraint firstAttribute="trailing" secondItem="nMa-Zm-D3N" secondAttribute="trailing" id="RBd-Ce-9G6"/>
+                            <constraint firstAttribute="trailing" secondItem="f00-MH-mBi" secondAttribute="trailing" constant="20" id="UOc-Gm-m5B"/>
+                            <constraint firstItem="aOZ-IZ-mia" firstAttribute="width" secondItem="MW0-EQ-sWX" secondAttribute="width" id="Wzn-u2-K0Y"/>
+                            <constraint firstItem="f00-MH-mBi" firstAttribute="leading" secondItem="AKf-R7-R8n" secondAttribute="trailing" constant="15" id="XTm-sw-5xb"/>
+                            <constraint firstItem="AKf-R7-R8n" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" constant="20" id="a93-Zv-32X"/>
+                            <constraint firstItem="MW0-EQ-sWX" firstAttribute="top" secondItem="JMJ-Wv-pzo" secondAttribute="bottom" constant="15" id="dsW-v2-hdg"/>
+                            <constraint firstItem="evy-EJ-nD5" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" constant="20" id="eAw-li-kK8"/>
+                            <constraint firstItem="f00-MH-mBi" firstAttribute="top" secondItem="O4H-il-fkw" secondAttribute="bottom" constant="15" id="f6Q-2M-p8t"/>
+                            <constraint firstItem="aOZ-IZ-mia" firstAttribute="leading" secondItem="MW0-EQ-sWX" secondAttribute="trailing" constant="15" id="fDi-k3-xPq"/>
+                            <constraint firstItem="JMJ-Wv-pzo" firstAttribute="top" secondItem="MhU-o6-lZy" secondAttribute="bottom" constant="5" id="kBP-yg-BkI"/>
+                            <constraint firstItem="O4H-il-fkw" firstAttribute="leading" secondItem="aOZ-IZ-mia" secondAttribute="trailing" constant="15" id="kzW-66-MPN"/>
+                            <constraint firstItem="O4H-il-fkw" firstAttribute="width" secondItem="MW0-EQ-sWX" secondAttribute="width" id="oKu-hG-9F8"/>
+                            <constraint firstItem="O4H-il-fkw" firstAttribute="top" secondItem="JMJ-Wv-pzo" secondAttribute="bottom" constant="15" id="oqB-PS-BbW"/>
+                            <constraint firstItem="MhU-o6-lZy" firstAttribute="top" secondItem="UI7-nU-Uvu" secondAttribute="bottom" constant="50" id="qFN-YP-rD4"/>
+                            <constraint firstItem="aOZ-IZ-mia" firstAttribute="top" secondItem="JMJ-Wv-pzo" secondAttribute="bottom" constant="15" id="r7F-by-LBk"/>
+                            <constraint firstItem="evy-EJ-nD5" firstAttribute="top" secondItem="1a2-Te-qoT" secondAttribute="bottom" constant="20" id="t3V-dc-8CM"/>
+                            <constraint firstItem="nMa-Zm-D3N" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" id="wOd-hP-CEB"/>
+                            <constraint firstItem="MhU-o6-lZy" firstAttribute="leading" secondItem="Fle-8J-t3S" secondAttribute="leading" constant="20" id="zKA-x7-9ol"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EwZ-gT-KhL" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="18" y="-653"/>
         </scene>
     </scenes>
 </document>

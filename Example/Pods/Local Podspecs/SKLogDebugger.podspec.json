@@ -1,22 +1,43 @@
 {
   "name": "SKLogDebugger",
-  "version": "0.1.0",
-  "summary": "A short description of SKLogDebugger.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/yuki@thehero.jp/SKLogDebugger",
+  "version": "0.0.1",
+  "summary": "This is Saikyo.",
+  "description": "Saikyo log debugger.",
+  "homepage": "https://github.com/aikizoku/SKLogDebugger-iOS",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "yuki@thehero.jp": "yuki@thehero.jp"
+    "aikizoku": "yuki@thehero.jp"
   },
   "source": {
-    "git": "https://github.com/yuki@thehero.jp/SKLogDebugger.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/aikizoku/SKLogDebugger-iOS.git",
+    "tag": "0.0.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
-  "source_files": "SKLogDebugger/Classes/**/*"
+  "source_files": "SKLogDebugger/Classes/**/*",
+  "resource_bundles": {
+    "SKLogDebugger": [
+      "SKLogDebugger/Assets/**/*.xib",
+      "SKLogDebugger/Assets/**/*.storyboard"
+    ]
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "RxSwift": [
+      "~> 3.0"
+    ],
+    "RxCocoa": [
+      "~> 3.0"
+    ],
+    "SwiftyJSON": [
+
+    ],
+    "SwiftyAttributes": [
+
+    ]
+  }
 }
