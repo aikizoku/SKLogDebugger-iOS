@@ -17,12 +17,12 @@ SKLogDebugger is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "SKLogDebugger"
+pod 'SKLogDebugger', :git => 'https://github.com/aikizoku/SKLogDebugger-iOS'
 ```
 
 ## Author
 
-yuki@thehero.jp, yuki@thehero.jp
+aikizoku, yuki@thehero.jp
 
 ## License
 
