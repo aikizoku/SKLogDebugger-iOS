@@ -27,6 +27,9 @@ public class SKLogDebugger {
     }
     
     public func addLog(action: String, data: [String: Any]) {
+        if SKLDDefaults.isDebugMode.getBool() && menuTrackView == nil {
+            SKLogDebugger.shared.showTrackView()
+        }
         var logs = self.logs.value
         logs.insert(SKLDLog(action: action, data: data), at: 0)
         self.logs.value = logs

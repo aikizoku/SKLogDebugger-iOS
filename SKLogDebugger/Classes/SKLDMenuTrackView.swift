@@ -36,6 +36,9 @@ class SKLDMenuTrackView: UIView {
         contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0.0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0.0).isActive = true
         clipsToBounds = true
+        
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
     }
     
     override func awakeFromNib() {

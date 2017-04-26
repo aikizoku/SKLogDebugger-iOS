@@ -29,7 +29,7 @@ class SKLDListViewController: UIViewController {
                                           action: #selector(onPushCloseButton(sender:)))
         navigationItem.rightBarButtonItem = closeButton
         
-        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle.skld()), forCellReuseIdentifier: kSKLDListCellName)
+        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle(for: SKLogDebugger.self)), forCellReuseIdentifier: kSKLDListCellName)
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)

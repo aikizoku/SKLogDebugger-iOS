@@ -37,6 +37,9 @@ class SKLDListTrackView: UIView {
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0.0).isActive = true
         clipsToBounds = true
         
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
+        
         tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle(for: SKLDListCell.self)), forCellReuseIdentifier: kSKLDListCellName)
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension

@@ -12,7 +12,7 @@ import UIKit
 extension UIStoryboard {
     
     static func instantiate(_ identifier: String) -> UIViewController {
-        let path = Bundle.skld().path(forResource: "SKLogDebugger", ofType: "bundle")!
+        let path = Bundle(for: SKLogDebugger.self).path(forResource: "SKLogDebugger", ofType: "bundle")!
         let sb = UIStoryboard(name: "SKLD", bundle: Bundle(path: path))
         return sb.instantiateViewController(withIdentifier: identifier)
     }

@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mso-0D-5LB" id="e7T-wS-19E">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="129.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-XI-8KT">
@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.3005672089041096" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="2Q6-tm-GRa" secondAttribute="bottom" id="4A2-Mn-hRN"/>
                             <constraint firstItem="usb-nM-Efz" firstAttribute="top" secondItem="cmE-XI-8KT" secondAttribute="top" constant="5" id="Cfa-RY-a00"/>
@@ -88,6 +88,7 @@
                 <outlet property="actionLabel" destination="2Q6-tm-GRa" id="HA9-IQ-xp7"/>
                 <outlet property="createdAtLabel" destination="usb-nM-Efz" id="pK8-hI-8WY"/>
                 <outlet property="dataLabel" destination="tIo-4N-2AQ" id="Jsw-zC-c3w"/>
+                <outlet property="headerView" destination="cmE-XI-8KT" id="B7l-Wk-Sbm"/>
             </connections>
             <point key="canvasLocation" x="-155" y="91"/>
         </tableViewCell>
