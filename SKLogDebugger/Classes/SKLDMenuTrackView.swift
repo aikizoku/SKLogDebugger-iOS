@@ -28,7 +28,7 @@ class SKLDMenuTrackView: UIView {
     }
     
     func initViews() {
-        Bundle(for: SKLDMenuTrackView.self).loadNibNamed("SKLDMenuTrackView", owner: self, options: nil)
+        Bundle.skld().loadNibNamed("SKLDMenuTrackView", owner: self, options: nil)
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.topAnchor.constraint(equalTo: topAnchor, constant: 0.0).isActive = true

@@ -15,15 +15,16 @@ public class SKLogDebugger {
     public static let shared = SKLogDebugger()
     
     var logs = Variable<[SKLDLog]>([])
-    fileprivate var omitPatterns: [String] = []
+    var validOmitActions = Variable<[String]>(SKLDDefaults.validOmitActions.getStrings())
+    fileprivate var omitActions: [String] = []
     fileprivate var menuTrackView: SKLDMenuTrackView?
     fileprivate var listTrackView: SKLDListTrackView?
     
     fileprivate let window = UIApplication.shared.delegate?.window
     fileprivate let disposeBag = DisposeBag()
     
-    public func setOmitActionPatterns(_ patterns: [String]) {
-        omitPatterns = patterns.reduce([], { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] })
+    public func setOmitActions(_ actions: [String]) {
+        omitActions = actions.unique()
     }
     
     public func addLog(action: String, data: [String: Any]) {
@@ -36,9 +37,8 @@ public class SKLogDebugger {
     }
     
     public func openSettingView() {
-        
         let vc = UIStoryboard.instantiate("SKLDSettingViewController") as! SKLDSettingViewController
-        vc.omitPatterns.value = omitPatterns
+        vc.omitActions.value = omitActions
         topViewController()?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
     }
 }

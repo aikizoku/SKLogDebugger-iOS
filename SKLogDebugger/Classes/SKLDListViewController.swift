@@ -22,27 +22,43 @@ class SKLDListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Log list"
+        navigationItem.title = "Log List"
         
         let closeButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                           target: self,
                                           action: #selector(onPushCloseButton(sender:)))
         navigationItem.rightBarButtonItem = closeButton
         
-        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle(for: SKLogDebugger.self)), forCellReuseIdentifier: kSKLDListCellName)
+        searchBar.text = SKLDDefaults.filterText.getString()
+        searchBar.rx.searchButtonClicked.subscribe(onNext: { [weak self] in
+            guard let `self` = self else { return }
+            self.searchBar.resignFirstResponder()
+        }).addDisposableTo(disposeBag)
+        
+        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle.skld()), forCellReuseIdentifier: kSKLDListCellName)
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        Observable.combineLatest(searchBar.rx.text, SKLogDebugger.shared.logs.asObservable()).subscribe(onNext: { [weak self] (filterText, logs) in
-            guard let `self` = self else { return }
-            if let filterText = self.searchBar.text, filterText.characters.count > 0 {
-                self.logs = logs.filter({ $0.index.contains(filterText.lowercased()) })
-            } else {
-                self.logs = logs
-            }
-            self.tableView.reloadData()
-        }).addDisposableTo(disposeBag)
+        Observable.combineLatest(
+            searchBar.rx.text,
+            SKLogDebugger.shared.logs.asObservable(),
+            SKLogDebugger.shared.validOmitActions.asObservable()
+            ).subscribe(onNext: { [weak self] (filterText, logs, validOmitActions) in
+                guard let `self` = self else { return }
+                var showLogs: [SKLDLog] = logs
+                if let filterText = self.searchBar.text {
+                    SKLDDefaults.filterText.set(filterText)
+                    if filterText.characters.count > 0 {
+                        showLogs = showLogs.filter({ $0.index.contains(filterText) })
+                    }
+                }
+                if validOmitActions.count > 0 {
+                    showLogs = showLogs.filter({ !validOmitActions.contains($0.action) })
+                }
+                self.logs = showLogs
+                self.tableView.reloadData()
+            }).addDisposableTo(disposeBag)
     }
     
     func onPushCloseButton(sender: UIBarButtonItem) {
@@ -68,5 +84,9 @@ extension SKLDListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchBar.resignFirstResponder()
     }
 }

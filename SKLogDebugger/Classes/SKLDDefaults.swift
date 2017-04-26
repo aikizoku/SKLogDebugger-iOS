@@ -12,7 +12,8 @@ enum SKLDDefaults: String {
     case
     isDebugMode,
     isShowRealtimeTrackView,
-    validOmitPatterns
+    validOmitActions,
+    filterText
 }
 
 extension SKLDDefaults {

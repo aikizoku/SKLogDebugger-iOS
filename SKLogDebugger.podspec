@@ -32,7 +32,7 @@ Saikyo log debugger.
   s.source_files = 'SKLogDebugger/Classes/**/*'
   
   s.resource_bundles = {
-    'SKLogDebugger' => ['SKLogDebugger/Assets/**/*.xib', 'SKLogDebugger/Assets/**/*.storyboard']
+'SKLogDebugger' => ['SKLogDebugger/Assets/**/*.{xib,storyboard}']
   }
 
   s.frameworks = 'UIKit'

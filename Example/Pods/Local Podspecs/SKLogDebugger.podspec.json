@@ -21,8 +21,7 @@
   "source_files": "SKLogDebugger/Classes/**/*",
   "resource_bundles": {
     "SKLogDebugger": [
-      "SKLogDebugger/Assets/**/*.xib",
-      "SKLogDebugger/Assets/**/*.storyboard"
+      "SKLogDebugger/Assets/**/*.{xib,storyboard}"
     ]
   },
   "frameworks": "UIKit",

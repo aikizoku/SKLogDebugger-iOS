@@ -12,7 +12,7 @@ import RxSwift
 
 fileprivate enum Section: Int {
     case debug = 0
-    case omitPattern = 1
+    case omitAction = 1
     
     case count = 2
 }
@@ -31,7 +31,7 @@ class SKLDSwitchCell: UITableViewCell {
 class SKLDSettingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var omitPatterns = Variable<[String]>([])
+    var omitActions = Variable<[String]>([])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +60,8 @@ extension SKLDSettingViewController: UITableViewDataSource, UITableViewDelegate 
         switch section {
         case Section.debug.rawValue:
             rows = 1
-        case Section.omitPattern.rawValue:
-            rows = omitPatterns.value.count
+        case Section.omitAction.rawValue:
+            rows = omitActions.value.count
         default:
             rows = 0
         }
@@ -82,18 +82,19 @@ extension SKLDSettingViewController: UITableViewDataSource, UITableViewDelegate 
                     SKLogDebugger.shared.hideTrackView()
                 }
             }).addDisposableTo(cell.disposeBag)
-        case Section.omitPattern.rawValue:
-            let omitPattern = omitPatterns.value[indexPath.row]
-            cell.textLabel?.text = "「\(omitPattern)」を表示"
-            cell.switchView.isOn = SKLDDefaults.validOmitPatterns.getStrings().contains(omitPattern)
+        case Section.omitAction.rawValue:
+            let omitAction = omitActions.value[indexPath.row]
+            cell.textLabel?.text = "「\(omitAction)」を表示"
+            cell.switchView.isOn = SKLDDefaults.validOmitActions.getStrings().contains(omitAction)
             cell.switchView.rx.isOn.subscribe(onNext: { isOn in
-                var validOmitPatterns = SKLDDefaults.validOmitPatterns.getStrings()
+                var validOmitActions = SKLDDefaults.validOmitActions.getStrings()
                 if isOn {
-                    validOmitPatterns.append(omitPattern)
+                    validOmitActions.append(omitAction)
                 } else {
-                    validOmitPatterns = validOmitPatterns.filter({ $0 != omitPattern })
+                    validOmitActions = validOmitActions.filter({ $0 != omitAction })
                 }
-                SKLDDefaults.validOmitPatterns.set(validOmitPatterns)
+                SKLDDefaults.validOmitActions.set(validOmitActions)
+                SKLogDebugger.shared.validOmitActions.value = validOmitActions
             }).addDisposableTo(cell.disposeBag)
         default:
             cell.textLabel?.text = nil

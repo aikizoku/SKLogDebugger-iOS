@@ -26,6 +26,6 @@ class SKLDLog: NSObject {
         
         rawString = JSON(data).rawString() ?? ""
         
-        index = "\(action.lowercased())::\(rawString.lowercased())"
+        index = "\(action)::\(rawString)"
     }
 }

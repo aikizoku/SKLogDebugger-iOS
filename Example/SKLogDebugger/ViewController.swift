@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        SKLogDebugger.shared.setOmitActionPatterns(["omit_1", "omit_2"])
+        SKLogDebugger.shared.setOmitActions(["action_omit_1", "action_omit_2"])
     }
 
     override func didReceiveMemoryWarning() {

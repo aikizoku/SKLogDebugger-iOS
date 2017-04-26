@@ -54,7 +54,7 @@ class SKLDListCell: UITableViewCell {
             actions.each(fle: { (first, last, action) in
                 actionText = actionText + action.withTextColor(textColor)
                 if !last {
-                    actionText = actionText + filter.withTextColor(textColor).withBackgroundColor(.lightGray)
+                    actionText = actionText + filter.withTextColor(textColor).withBackgroundColor(UIColor.color(r: 0, g: 0, b: 0, a: 0.3))
                 }
             })
             actionLabel.attributedText = actionText
@@ -64,7 +64,7 @@ class SKLDListCell: UITableViewCell {
             datas.each(fle: { (first, last, data) in
                 dataText = dataText + data.withTextColor(textColor)
                 if !last {
-                    dataText = dataText + filter.withTextColor(textColor).withBackgroundColor(.lightGray)
+                    dataText = dataText + filter.withTextColor(textColor).withBackgroundColor(UIColor.color(r: 0, g: 0, b: 0, a: 0.3))
                 }
             })
             dataLabel.attributedText = dataText

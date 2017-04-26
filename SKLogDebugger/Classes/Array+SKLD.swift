@@ -38,4 +38,8 @@ extension Array {
             closure(first, last, self[i])
         }
     }
+    
+    func unique() -> Array {
+        return NSOrderedSet(array: self).array as! Array<Element>
+    }
 }

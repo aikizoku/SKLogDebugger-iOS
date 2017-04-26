@@ -15,6 +15,8 @@ class SKLDListTrackView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    var logs: [SKLDLog] = []
+    
     let disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
@@ -28,7 +30,7 @@ class SKLDListTrackView: UIView {
     }
     
     func initViews() {
-        Bundle(for: SKLDListTrackView.self).loadNibNamed("SKLDListTrackView", owner: self, options: nil)
+        Bundle.skld().loadNibNamed("SKLDListTrackView", owner: self, options: nil)
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.topAnchor.constraint(equalTo: topAnchor, constant: 0.0).isActive = true
@@ -40,15 +42,23 @@ class SKLDListTrackView: UIView {
         layer.cornerRadius = 10
         layer.masksToBounds = true
         
-        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle(for: SKLDListCell.self)), forCellReuseIdentifier: kSKLDListCellName)
+        tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle.skld()), forCellReuseIdentifier: kSKLDListCellName)
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        SKLogDebugger.shared.logs.asObservable().subscribe(onNext: { [weak self] logs in
-            guard let `self` = self else { return }
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-        }).addDisposableTo(disposeBag)
+        Observable.combineLatest(
+            SKLogDebugger.shared.logs.asObservable(),
+            SKLogDebugger.shared.validOmitActions.asObservable()
+            ).subscribe(onNext: { [weak self] (logs, validOmitActions) in
+                guard let `self` = self else { return }
+                var showLogs: [SKLDLog] = logs
+                if validOmitActions.count > 0 {
+                    showLogs = showLogs.filter({ !validOmitActions.contains($0.action) })
+                }
+                self.logs = showLogs
+                self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            }).addDisposableTo(disposeBag)
     }
     
     override func awakeFromNib() {
@@ -62,12 +72,12 @@ extension SKLDListTrackView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SKLogDebugger.shared.logs.value.count
+        return logs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kSKLDListCellName, for: indexPath) as! SKLDListCell
-        cell.set(themeColor: .black, log: SKLogDebugger.shared.logs.value[indexPath.row], filter: nil)
+        cell.set(themeColor: .black, log: logs[indexPath.row], filter: nil)
         return cell
     }
 }
