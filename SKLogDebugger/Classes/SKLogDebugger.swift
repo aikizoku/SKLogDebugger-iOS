@@ -20,7 +20,6 @@ public class SKLogDebugger {
     fileprivate var menuTrackView: SKLDMenuTrackView?
     fileprivate var listTrackView: SKLDListTrackView?
     
-    fileprivate let window = UIApplication.shared.delegate?.window
     fileprivate let disposeBag = DisposeBag()
     
     public func setOmitActions(_ actions: [String]) {
@@ -51,12 +50,12 @@ extension SKLogDebugger {
         
         if let view = menuTrackView {
             view.removeFromSuperview()
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
         } else {
             let view = SKLDMenuTrackView(frame: CGRect(x: (w/2)-100, y: 20, width: 200, height: 50))
             let gesture = UIPanGestureRecognizer()
             gesture.rx.event.subscribe(onNext: { [weak self] gesture in
-                guard let `self` = self, let window = self.window, let w = window else { return }
+                guard let `self` = self, let window = UIApplication.shared.delegate?.window, let w = window else { return }
                 let p = gesture.location(in: w)
                 switch gesture.state {
                 case .changed:
@@ -77,18 +76,18 @@ extension SKLogDebugger {
                 guard let `self` = self else { return }
                 self.openListView()
             }).addDisposableTo(view.disposeBag)
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
             menuTrackView = view
         }
         
         if let view = self.listTrackView {
             view.removeFromSuperview()
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
         } else {
             let view = SKLDListTrackView(frame: CGRect(x: (w/2)-150, y: h-220, width: 300, height: 200))
             let gesture = UIPanGestureRecognizer()
             gesture.rx.event.subscribe(onNext: { [weak self] gesture in
-                guard let `self` = self, let window = self.window, let w = window else { return }
+                guard let `self` = self, let window = UIApplication.shared.delegate?.window, let w = window else { return }
                 let p = gesture.location(in: w)
                 switch gesture.state {
                 case .changed:
@@ -99,7 +98,7 @@ extension SKLogDebugger {
                 }
             }).addDisposableTo(view.disposeBag)
             view.addGestureRecognizer(gesture)
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
             listTrackView = view
         }
     }
