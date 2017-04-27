@@ -117,25 +117,7 @@ extension SKLogDebugger {
     }
     
     fileprivate func topViewController() -> UIViewController? {
-        return topViewController(viewController: UIApplication.shared.keyWindow?.rootViewController)
-    }
-    
-    fileprivate func topViewController(viewController: UIViewController?) -> UIViewController? {
-        guard let rvc = UIApplication.shared.keyWindow?.rootViewController else { return nil }
-        if let nrvc = rvc as? UINavigationController {
-            return topViewController(viewController: nrvc.visibleViewController)
-        }
-        if let trvc = viewController as? UITabBarController {
-            if let srvc = trvc.selectedViewController {
-                return topViewController(viewController: srvc)
-            } else {
-                return trvc
-            }
-        }
-        if let vc = viewController?.presentedViewController {
-            return topViewController(viewController:vc)
-        }
-        return viewController
+        return UIApplication.shared.keyWindow?.rootViewController
     }
 }
 
