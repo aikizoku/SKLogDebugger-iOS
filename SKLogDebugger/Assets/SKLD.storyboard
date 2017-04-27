@@ -11,7 +11,7 @@
         <!--Setting View Controller-->
         <scene sceneID="vFy-pR-Lik">
             <objects>
-                <viewController storyboardIdentifier="SKLDSettingViewController" id="EF7-bt-9xA" customClass="SKLDSettingViewController" customModule="SKLogDebuggerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SKLDSettingViewController" id="EF7-bt-9xA" customClass="SKLDSettingViewController" customModule="SKLogDebugger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R1l-aW-FJu"/>
                         <viewControllerLayoutGuide type="bottom" id="4vD-sF-Gmo"/>
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SKLDSwitchCell" id="oDK-Pq-kqd" customClass="SKLDSwitchCell" customModule="SKLogDebuggerDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SKLDSwitchCell" id="oDK-Pq-kqd" customClass="SKLDSwitchCell" customModule="SKLogDebugger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oDK-Pq-kqd" id="30Q-am-aiv">
@@ -72,7 +72,7 @@
         <!--List View Controller-->
         <scene sceneID="HZI-jY-8bU">
             <objects>
-                <viewController storyboardIdentifier="SKLDListViewController" id="uMT-dF-uCy" customClass="SKLDListViewController" customModule="SKLogDebuggerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SKLDListViewController" id="uMT-dF-uCy" customClass="SKLDListViewController" customModule="SKLogDebugger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ntr-gP-yz9"/>
                         <viewControllerLayoutGuide type="bottom" id="XD8-DK-7QD"/>

@@ -20,7 +20,6 @@ public class SKLogDebugger {
     fileprivate var menuTrackView: SKLDMenuTrackView?
     fileprivate var listTrackView: SKLDListTrackView?
     
-    fileprivate let window = UIApplication.shared.delegate?.window
     fileprivate let disposeBag = DisposeBag()
     
     public func setOmitActions(_ actions: [String]) {
@@ -40,23 +39,25 @@ public class SKLogDebugger {
         let vc = UIStoryboard.instantiate("SKLDSettingViewController") as! SKLDSettingViewController
         vc.omitActions.value = omitActions
         topViewController()?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+        hideTrackView()
     }
 }
 
 extension SKLogDebugger {
     
     func showTrackView() {
+        guard SKLDDefaults.isDebugMode.getBool() else { return }
         let w = UIScreen.main.bounds.width
         let h = UIScreen.main.bounds.height
         
         if let view = menuTrackView {
             view.removeFromSuperview()
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
         } else {
-            let view = SKLDMenuTrackView(frame: CGRect(x: (w/2)-100, y: 20, width: 200, height: 50))
+            let view = SKLDMenuTrackView(frame: CGRect(x: (w/2)-125, y: 20, width: 250, height: 50))
             let gesture = UIPanGestureRecognizer()
-            gesture.rx.event.subscribe(onNext: { [weak self] gesture in
-                guard let `self` = self, let window = self.window, let w = window else { return }
+            gesture.rx.event.subscribe(onNext: { gesture in
+                guard let window = UIApplication.shared.delegate?.window, let w = window else { return }
                 let p = gesture.location(in: w)
                 switch gesture.state {
                 case .changed:
@@ -67,28 +68,32 @@ extension SKLogDebugger {
                 }
             }).addDisposableTo(view.disposeBag)
             view.addGestureRecognizer(gesture)
-            view.liveButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            view.realtimeButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 if let listTrackView = self.listTrackView {
                     listTrackView.isHidden = !listTrackView.isHidden
                 }
             }).addDisposableTo(view.disposeBag)
-            view.listButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            view.logListButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
-                self.openListView()
+                self.openLogListView()
             }).addDisposableTo(view.disposeBag)
-            window??.addSubview(view)
+            view.settingButton.rx.tap.subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                self.openSettingView()
+            }).addDisposableTo(view.disposeBag)
+            UIApplication.shared.delegate?.window??.addSubview(view)
             menuTrackView = view
         }
         
         if let view = self.listTrackView {
             view.removeFromSuperview()
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
         } else {
             let view = SKLDListTrackView(frame: CGRect(x: (w/2)-150, y: h-220, width: 300, height: 200))
             let gesture = UIPanGestureRecognizer()
-            gesture.rx.event.subscribe(onNext: { [weak self] gesture in
-                guard let `self` = self, let window = self.window, let w = window else { return }
+            gesture.rx.event.subscribe(onNext: { gesture in
+                guard let window = UIApplication.shared.delegate?.window, let w = window else { return }
                 let p = gesture.location(in: w)
                 switch gesture.state {
                 case .changed:
@@ -99,7 +104,7 @@ extension SKLogDebugger {
                 }
             }).addDisposableTo(view.disposeBag)
             view.addGestureRecognizer(gesture)
-            window??.addSubview(view)
+            UIApplication.shared.delegate?.window??.addSubview(view)
             listTrackView = view
         }
     }
@@ -109,7 +114,7 @@ extension SKLogDebugger {
         listTrackView?.removeFromSuperview()
     }
     
-    fileprivate func openListView() {
+    fileprivate func openLogListView() {
         let vc = UIStoryboard.instantiate("SKLDListViewController") as! SKLDListViewController
         let nvc = UINavigationController(rootViewController: vc)
         topViewController()?.present(nvc, animated: true, completion: nil)
