@@ -1,15 +1,5 @@
 # SKLogDebugger
-
-[![CI Status](http://img.shields.io/travis/yuki@thehero.jp/SKLogDebugger.svg?style=flat)](https://travis-ci.org/yuki@thehero.jp/SKLogDebugger)
-[![Version](https://img.shields.io/cocoapods/v/SKLogDebugger.svg?style=flat)](http://cocoapods.org/pods/SKLogDebugger)
-[![License](https://img.shields.io/cocoapods/l/SKLogDebugger.svg?style=flat)](http://cocoapods.org/pods/SKLogDebugger)
-[![Platform](https://img.shields.io/cocoapods/p/SKLogDebugger.svg?style=flat)](http://cocoapods.org/pods/SKLogDebugger)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+Saikyo log debugger.
 
 ## Installation
 
@@ -19,6 +9,66 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'SKLogDebugger', :git => 'https://github.com/aikizoku/SKLogDebugger-iOS'
 ```
+
+## Example
+
+Import this Library.
+```swift
+import SKLogDebugger
+```
+
+Add log data.
+```swift
+// Sample 1
+SKLogDebugger.shared.addLog(
+  action: "action_1",
+  data: [:]
+)
+
+// Sample 2
+SKLogDebugger.shared.addLog(
+  action: "action_2",
+  data: [
+    "data1": 123,
+    "data2": "aaa",
+    "data3": true
+  ]
+)
+
+// Sample 3
+SKLogDebugger.shared.addLog(
+  action: "action_3",
+  data: [
+    "data1": [1, 2, 3, "a", "b", "c"],
+    "data2": [
+      "data21": -123,
+      "data22": "bbb",
+      "data23": false
+    ],
+    "data3": [
+      "data31": [
+        "data311": "999"
+       ]
+    ]
+  ]
+)
+```
+
+Open setting view.
+```swift
+SKLogDebugger.shared.openSettingView()
+```
+
+Set omit actions.
+```swift
+SKLogDebugger.shared.setOmitActions(["action_2", "action_3"])
+```
+
+## Requirements
+
+Swift3
+
+RxSwift, RxCocoa, SwiftyJSON, SwiftyAttributes
 
 ## Author
 
