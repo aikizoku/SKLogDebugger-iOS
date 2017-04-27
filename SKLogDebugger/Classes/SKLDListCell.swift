@@ -40,11 +40,9 @@ class SKLDListCell: UITableViewCell {
         var textColor: UIColor
         switch themeColor {
         case .black:
-            contentView.backgroundColor = UIColor.color(r: 0, g: 0, b: 0, a: 0.5)
             headerView.backgroundColor = UIColor.color(r: 0, g: 0, b: 0, a: 0.3)
             textColor = UIColor.white
         case .white:
-            contentView.backgroundColor = UIColor.white
             headerView.backgroundColor = UIColor.color(r: 0, g: 0, b: 0, a: 0.1)
             textColor = UIColor.black
         }

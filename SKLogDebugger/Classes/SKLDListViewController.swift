@@ -22,7 +22,7 @@ class SKLDListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Log List"
+        navigationItem.title = "ログリスト"
         
         let closeButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                           target: self,
@@ -43,8 +43,8 @@ class SKLDListViewController: UIViewController {
         Observable.combineLatest(
             searchBar.rx.text,
             SKLogDebugger.shared.logs.asObservable(),
-            SKLogDebugger.shared.validOmitActions.asObservable()
-            ).subscribe(onNext: { [weak self] (filterText, logs, validOmitActions) in
+            SKLogDebugger.shared.validOmitActions.asObservable())
+            .subscribe(onNext: { [weak self] (filterText, logs, validOmitActions) in
                 guard let `self` = self else { return }
                 var showLogs: [SKLDLog] = logs
                 if let filterText = self.searchBar.text {
@@ -84,6 +84,12 @@ extension SKLDListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        let log = logs[indexPath.row]
+        let alert = UIAlertController(title: log.action, message: "ログをコピーしました", preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { alert in
+            UIPasteboard.general.string = "action = \(log.action)\ndata =\n\(log.rawString)"
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

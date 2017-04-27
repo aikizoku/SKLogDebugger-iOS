@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mso-0D-5LB" id="e7T-wS-19E">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmE-XI-8KT">
@@ -72,7 +72,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="uQI-Bn-iTC" firstAttribute="leading" secondItem="e7T-wS-19E" secondAttribute="leading" id="1gK-U7-Rf4"/>
                     <constraint firstItem="uQI-Bn-iTC" firstAttribute="top" secondItem="cmE-XI-8KT" secondAttribute="bottom" id="LpC-8R-bQB"/>
@@ -84,6 +84,7 @@
                     <constraint firstItem="uQI-Bn-iTC" firstAttribute="top" secondItem="cmE-XI-8KT" secondAttribute="bottom" id="kNy-0w-g40"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="actionLabel" destination="2Q6-tm-GRa" id="HA9-IQ-xp7"/>
                 <outlet property="createdAtLabel" destination="usb-nM-Efz" id="pK8-hI-8WY"/>

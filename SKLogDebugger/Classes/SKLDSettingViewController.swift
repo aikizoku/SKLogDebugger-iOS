@@ -36,7 +36,7 @@ class SKLDSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Log debugger 設定"
+        navigationItem.title = "設定"
         
         let closeButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                           target: self,
@@ -45,7 +45,8 @@ class SKLDSettingViewController: UIViewController {
     }
     
     func onPushCloseButton(sender: UIBarButtonItem) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+        SKLogDebugger.shared.showTrackView()
     }
 }
 
@@ -76,15 +77,10 @@ extension SKLDSettingViewController: UITableViewDataSource, UITableViewDelegate 
             cell.switchView.isOn = SKLDDefaults.isDebugMode.getBool()
             cell.switchView.rx.isOn.subscribe(onNext: { isOn in
                 SKLDDefaults.isDebugMode.set(isOn)
-                if isOn {
-                    SKLogDebugger.shared.showTrackView()
-                } else {
-                    SKLogDebugger.shared.hideTrackView()
-                }
             }).addDisposableTo(cell.disposeBag)
         case Section.omitAction.rawValue:
             let omitAction = omitActions.value[indexPath.row]
-            cell.textLabel?.text = "「\(omitAction)」を表示"
+            cell.textLabel?.text = "「\(omitAction)」を非表示"
             cell.switchView.isOn = SKLDDefaults.validOmitActions.getStrings().contains(omitAction)
             cell.switchView.rx.isOn.subscribe(onNext: { isOn in
                 var validOmitActions = SKLDDefaults.validOmitActions.getStrings()

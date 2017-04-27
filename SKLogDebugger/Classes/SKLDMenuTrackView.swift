@@ -12,8 +12,9 @@ import RxSwift
 
 class SKLDMenuTrackView: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var liveButton: UIButton!
-    @IBOutlet weak var listButton: UIButton!
+    @IBOutlet weak var realtimeButton: UIButton!
+    @IBOutlet weak var logListButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     let disposeBag = DisposeBag()
     
