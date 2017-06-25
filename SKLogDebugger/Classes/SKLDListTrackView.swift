@@ -57,7 +57,8 @@ class SKLDListTrackView: UIView {
                     showLogs = showLogs.filter({ !validOmitActions.contains($0.action) })
                 }
                 self.logs = showLogs
-                self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                // self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                self.tableView.reloadData()
             }).addDisposableTo(disposeBag)
     }
     
