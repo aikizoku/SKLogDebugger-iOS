@@ -20,6 +20,8 @@ public class SKLogDebugger {
     fileprivate var menuTrackView: SKLDMenuTrackView?
     fileprivate var listTrackView: SKLDListTrackView?
     
+    fileprivate var isShowTrackView = false
+    fileprivate let addLogMutex = NSLock()
     fileprivate let disposeBag = DisposeBag()
     
     public func setOmitActions(_ actions: [String]) {
@@ -27,12 +29,23 @@ public class SKLogDebugger {
     }
     
     public func addLog(action: String, data: [String: Any]) {
-        if SKLDDefaults.isDebugMode.getBool() && menuTrackView == nil {
-            SKLogDebugger.shared.showTrackView()
+        DispatchQueue.global(qos: .default).async {
+            self.addLogMutex.lock()
+            defer { self.addLogMutex.unlock() }
+            
+            if SKLDDefaults.isDebugMode.getBool() && !self.isShowTrackView {
+                self.isShowTrackView = true
+                DispatchQueue.main.async {
+                    SKLogDebugger.shared.showTrackView()
+                }
+            }
+            
+            DispatchQueue.main.async {
+                var logs = self.logs.value
+                logs.insert(SKLDLog(action: action, data: data), at: 0)
+                self.logs.value = logs
+            }
         }
-        var logs = self.logs.value
-        logs.insert(SKLDLog(action: action, data: data), at: 0)
-        self.logs.value = logs
     }
     
     public func openSettingView() {
