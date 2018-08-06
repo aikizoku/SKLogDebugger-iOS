@@ -1,29 +1,36 @@
 PODS:
-  - RxCocoa (3.4.0):
-    - RxSwift (~> 3.4)
-  - RxSwift (3.4.0)
-  - SKLogDebugger (0.0.1):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
+  - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.2.0)
+  - SKLogDebugger (1.0.0):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
     - SwiftyAttributes
     - SwiftyJSON
-  - SwiftyAttributes (3.1.0)
-  - SwiftyJSON (3.1.4)
+  - SwiftyAttributes (5.0.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - SKLogDebugger (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - RxCocoa
+    - RxSwift
+    - SwiftyAttributes
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   SKLogDebugger:
     :path: "../"
 
 SPEC CHECKSUMS:
-  RxCocoa: d14ef6b6029e1ddc6e966508c09289090de68ff9
-  RxSwift: 3789a1af753002a14edecdb698a2424624296a9c
-  SKLogDebugger: 4975c547f350201c824cc913fee002eb4e5f6a9b
-  SwiftyAttributes: f337a324cd21f1b18782ab85d3478ccae73f7593
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
+  SKLogDebugger: 3ced0d22de220c268834f5b4414b04278442778e
+  SwiftyAttributes: a6e7bbac1e9a9f5c0b42e4055563ca091dda03ad
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
 PODFILE CHECKSUM: 9ec37af70ceae8032045e83562b64b1e27a5f423
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3

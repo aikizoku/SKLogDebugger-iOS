@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SKLogDebugger'
-  s.version          = '0.1.1'
+  s.version          = '1.0.0'
   s.summary          = 'This is Saikyo.'
 
 # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Saikyo log debugger.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'aikizoku' => 'yuki@thehero.jp' }
   s.source           = { :git => 'https://github.com/aikizoku/SKLogDebugger-iOS.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  # s.social_media_url = 'https://twitter.com/aikizoku'
 
   s.ios.deployment_target = '9.0'
 
@@ -36,8 +36,8 @@ Saikyo log debugger.
   }
 
   s.frameworks = 'UIKit'
-  s.dependency 'RxSwift', '~> 3.0'
-  s.dependency 'RxCocoa', '~> 3.0'
+  s.dependency 'RxSwift', '~> 4.0'
+  s.dependency 'RxCocoa', '~> 4.0'
   s.dependency 'SwiftyJSON'
   s.dependency 'SwiftyAttributes'
 end

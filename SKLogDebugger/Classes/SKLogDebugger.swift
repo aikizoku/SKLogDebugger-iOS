@@ -14,8 +14,11 @@ import RxCocoa
 public class SKLogDebugger {
     public static let shared = SKLogDebugger()
     
-    var logs = Variable<[SKLDLog]>([])
-    var validOmitActions = Variable<[String]>(SKLDDefaults.validOmitActions.getStrings())
+    let logsObserver = PublishSubject<(logs: [SKLDLog], omitActions: [String])>()
+    var logs: [SKLDLog] = []
+    var validOmitActions: [String] = SKLDDefaults.validOmitActions.getStrings()
+    var parentViewController: UIViewController?
+
     fileprivate var omitActions: [String] = []
     fileprivate var menuTrackView: SKLDMenuTrackView?
     fileprivate var listTrackView: SKLDListTrackView?
@@ -29,7 +32,8 @@ public class SKLogDebugger {
     }
     
     public func addLog(action: String, data: [String: Any]) {
-        DispatchQueue.global(qos: .default).async {
+        DispatchQueue.global(qos: .default).async { [weak self] in
+            guard let `self` = self else { return }
             self.addLogMutex.lock()
             defer { self.addLogMutex.unlock() }
             
@@ -40,19 +44,24 @@ public class SKLogDebugger {
                 }
             }
             
-            DispatchQueue.main.async {
-                var logs = self.logs.value
-                logs.insert(SKLDLog(action: action, data: data), at: 0)
-                self.logs.value = logs
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
+                self.logs.insert(SKLDLog(action: action, data: data), at: 0)
+                self.logsObserver.onNext((logs: self.logs, omitActions: self.validOmitActions))
             }
         }
     }
     
     public func openSettingView() {
         let vc = UIStoryboard.instantiate("SKLDSettingViewController") as! SKLDSettingViewController
-        vc.omitActions.value = omitActions
+        vc.omitActions = omitActions
+        vc.omitActionsObserver.onNext(omitActions)
         topViewController()?.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
         hideTrackView()
+    }
+    
+    public func setParentViewController(_ viewController: UIViewController?) {
+        parentViewController = viewController
     }
 }
 
@@ -79,22 +88,22 @@ extension SKLogDebugger {
                 default:
                     break
                 }
-            }).addDisposableTo(view.disposeBag)
+            }).disposed(by: view.disposeBag)
             view.addGestureRecognizer(gesture)
             view.realtimeButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 if let listTrackView = self.listTrackView {
                     listTrackView.isHidden = !listTrackView.isHidden
                 }
-            }).addDisposableTo(view.disposeBag)
+            }).disposed(by: view.disposeBag)
             view.logListButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 self.openLogListView()
-            }).addDisposableTo(view.disposeBag)
+            }).disposed(by: view.disposeBag)
             view.settingButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 self.openSettingView()
-            }).addDisposableTo(view.disposeBag)
+            }).disposed(by: view.disposeBag)
             UIApplication.shared.delegate?.window??.addSubview(view)
             menuTrackView = view
         }
@@ -115,7 +124,7 @@ extension SKLogDebugger {
                 default:
                     break
                 }
-            }).addDisposableTo(view.disposeBag)
+            }).disposed(by: view.disposeBag)
             view.addGestureRecognizer(gesture)
             UIApplication.shared.delegate?.window??.addSubview(view)
             listTrackView = view
@@ -135,7 +144,11 @@ extension SKLogDebugger {
     }
     
     fileprivate func topViewController() -> UIViewController? {
-        return UIApplication.shared.keyWindow?.rootViewController
+        if let parentViewController = parentViewController {
+            return parentViewController
+        } else {
+            return UIApplication.shared.keyWindow?.rootViewController
+        }
     }
 }
 

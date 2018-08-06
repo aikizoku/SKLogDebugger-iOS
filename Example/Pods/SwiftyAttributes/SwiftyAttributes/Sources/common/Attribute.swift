@@ -28,6 +28,14 @@ public typealias Shadow = NSShadow
 public typealias TextAttachment = NSTextAttachment
 #endif
 
+#if swift(>=4.2)
+    public typealias AttributeName = NSAttributedString.Key
+#elseif swift(>=4.0)
+    public typealias AttributeName = NSAttributedStringKey
+#else
+    public typealias AttributeName = Attribute.Name
+#endif
+
 /**
  Represents attributes that can be applied to NSAttributedStrings.
  */
@@ -130,7 +138,10 @@ public enum Attribute {
     /// The writing directions to apply to the attributed string. See `WritingDirection` for values. Only available on iOS 9.0+.
     case writingDirections([WritingDirection])
 
-    init(name: Attribute.Name, foundationValue: Any) {
+    /// A custom attribute with a given attribute name and value.
+    case custom(String, Any)
+
+    init(name: AttributeName, foundationValue: Any) {
         func validate<Type>(_ val: Any) -> Type {
             assert(val is Type, "Attribute with name \(name.rawValue) must have a value of type \(Type.self)")
             return val as! Type
@@ -179,127 +190,150 @@ public enum Attribute {
         case .strokeColor: ret = .strokeColor(validate(foundationValue))
         case .strokeWidth: ret = .strokeWidth(validateDouble(foundationValue))
         case .strikethroughColor: ret = .strikethroughColor(validate(foundationValue))
-        case .strikethroughStyle: ret = .strikethroughStyle(StrikethroughStyle(rawValue: validate(foundationValue))!)
-        case .textColor: ret = .textColor(validate(foundationValue))
+        case .strikethroughStyle:
+            #if swift(>=4.2)
+                let style = StrikethroughStyle(rawValue: validate(foundationValue))
+            #else
+                let style = StrikethroughStyle(rawValue: validate(foundationValue))!
+            #endif
+            ret = .strikethroughStyle(style)
+        case .foregroundColor: ret = .textColor(validate(foundationValue))
         case .textEffect: ret = .textEffect(TextEffect(rawValue: validate(foundationValue))!)
         case .underlineColor: ret = .underlineColor(validate(foundationValue))
-        case .underlineStyle: ret = .underlineStyle(UnderlineStyle(rawValue: validate(foundationValue))!)
+        case .underlineStyle:
+            #if swift(>=4.2)
+                let style = UnderlineStyle(rawValue: validate(foundationValue))
+            #else
+                let style = UnderlineStyle(rawValue: validate(foundationValue))!
+            #endif
+            ret = .underlineStyle(style)
         case .verticalGlyphForm: ret = .verticalGlyphForm(VerticalGlyphForm(rawValue: validate(foundationValue))!)
         case .writingDirection:
             let values: [Int] = validate(foundationValue)
-            ret = .writingDirections(values.flatMap(WritingDirection.init))
-        default: break
+            #if swift(>=4.1)
+                ret = .writingDirections(values.compactMap(WritingDirection.init))
+            #else
+                ret = .writingDirections(values.flatMap(WritingDirection.init))
+            #endif
+        default:
+            if ret == nil {
+                ret = .custom(name.rawValue, foundationValue)
+            }
         }
 
         self = ret
     }
 
     /// The key name corresponding to the attribute.
-    public var keyName: String {
+    public var keyName: StringKey {
 
-        var name: Attribute.Name!
+        var name: AttributeName!
 
         // Bug in Swift prevents us from putting directives inside switch statements (https://bugs.swift.org/browse/SR-2)
 
         #if os(watchOS)
         #else
             switch self {
-            case .attachment(_): name = .attachment
-            case .shadow(_): name = .shadow
+            case .attachment: name = .attachment
+            case .shadow: name = .shadow
             default: break
             }
         #endif
 
         #if os(macOS)
             switch self {
-            case .cursor(_): name = .cursor
-            case .markedClauseSegment(_): name = .markedClauseSegment
-            case .spellingState(_): name = .spellingState
-            case .superscript(_): name = .superscript
-            case .textAlternatives(_): name = .textAlternatives
-            case .toolTip(_): name = .toolTip
+            case .cursor: name = .cursor
+            case .markedClauseSegment: name = .markedClauseSegment
+            case .spellingState: name = .spellingState
+            case .superscript: name = .superscript
+            case .textAlternatives: name = .textAlternatives
+            case .toolTip: name = .toolTip
             default: break
             }
         #endif
 
         switch self {
-        case .baselineOffset(_): name = .baselineOffset
-        case .backgroundColor(_): name = .backgroundColor
-        case .expansion(_): name = .expansion
-        case .font(_): name = .font
-        case .kern(_): name = .kern
-        case .ligatures(_): name = .ligature
-        case .link(_): name = .link
-        case .obliqueness(_): name = .obliqueness
-        case .paragraphStyle(_): name = .paragraphStyle
-        case .strokeColor(_): name = .strokeColor
-        case .strokeWidth(_): name = .strokeWidth
-        case .strikethroughColor(_): name = .strikethroughColor
-        case .strikethroughStyle(_): name = .strikethroughStyle
-        case .textColor(_): name = .textColor
-        case .textEffect(_): name = .textEffect
-        case .underlineColor(_): name = .underlineColor
-        case .underlineStyle(_): name = .underlineStyle
-        case .writingDirections(_): name = .writingDirection
-        case .verticalGlyphForm(_): name = .verticalGlyphForm
+        case .baselineOffset: name = .baselineOffset
+        case .backgroundColor: name = .backgroundColor
+        case .expansion: name = .expansion
+        case .font: name = .font
+        case .kern: name = .kern
+        case .ligatures: name = .ligature
+        case .link: name = .link
+        case .obliqueness: name = .obliqueness
+        case .paragraphStyle: name = .paragraphStyle
+        case .strokeColor: name = .strokeColor
+        case .strokeWidth: name = .strokeWidth
+        case .strikethroughColor: name = .strikethroughColor
+        case .strikethroughStyle: name = .strikethroughStyle
+        case .textColor: name = .foregroundColor
+        case .textEffect: name = .textEffect
+        case .underlineColor: name = .underlineColor
+        case .underlineStyle: name = .underlineStyle
+        case .writingDirections: name = .writingDirection
+        case .verticalGlyphForm: name = .verticalGlyphForm
+        case .custom(let attributeName, _) where name == nil:
+            name = AttributeName(rawValue: attributeName)
         default: break
         }
 
-        return name.rawValue
+        #if swift(>=4.0)
+            return name
+        #else
+            return name.rawValue
+        #endif
     }
 
     // Convenience getter variable for the associated value of the attribute. See each case to determine the return type.
     public var value: Any {
 
-        var ret: Any!
-
         // Bug in Swift prevents us from putting directives inside switch statements (https://bugs.swift.org/browse/SR-2)
 
         #if os(watchOS)
         #else
             switch self {
-            case .attachment(let attachment): ret = attachment
-            case .shadow(let shadow): ret = shadow
+            case .attachment(let attachment): return attachment
+            case .shadow(let shadow): return shadow
             default: break
             }
         #endif
 
         #if os(macOS)
             switch self {
-            case .cursor(let cursor): ret = cursor
-            case .markedClauseSegment(let segment): ret = segment
-            case .spellingState(let state): ret = state
-            case .superscript(let superscript): ret = superscript
-            case .textAlternatives(let alternatives): ret = alternatives
-            case .toolTip(let text): ret = text
+            case .cursor(let cursor): return cursor
+            case .markedClauseSegment(let segment): return segment
+            case .spellingState(let state): return state
+            case .superscript(let superscript): return superscript
+            case .textAlternatives(let alternatives): return alternatives
+            case .toolTip(let text): return text
             default: break
             }
         #endif
 
         switch self {
-        case .baselineOffset(let offset): ret = offset
-        case .backgroundColor(let color): ret = color
-        case .expansion(let expansion): ret = expansion
-        case .font(let font): ret = font
-        case .kern(let kern): ret = kern
-        case .ligatures(let ligatures): ret = ligatures
-        case .link(let link): ret = link
-        case .obliqueness(let value): ret = value
-        case .paragraphStyle(let style): ret = style
-        case .strokeColor(let color): ret = color
-        case .strokeWidth(let width): ret = width
-        case .strikethroughColor(let color): ret = color
-        case .strikethroughStyle(let style): ret = style
-        case .textColor(let color): ret = color
-        case .textEffect(let effect): ret = effect
-        case .underlineColor(let color): ret = color
-        case .underlineStyle(let style): ret = style
-        case .verticalGlyphForm(let form): ret = form
-        case .writingDirections(let directions): ret = directions
-        default: break
+        case .baselineOffset(let offset): return offset
+        case .backgroundColor(let color): return color
+        case .expansion(let expansion): return expansion
+        case .font(let font): return font
+        case .kern(let kern): return kern
+        case .ligatures(let ligatures): return ligatures
+        case .link(let link): return link
+        case .obliqueness(let value): return value
+        case .paragraphStyle(let style): return style
+        case .strokeColor(let color): return color
+        case .strokeWidth(let width): return width
+        case .strikethroughColor(let color): return color
+        case .strikethroughStyle(let style): return style
+        case .textColor(let color): return color
+        case .textEffect(let effect): return effect
+        case .underlineColor(let color): return color
+        case .underlineStyle(let style): return style
+        case .verticalGlyphForm(let form): return form
+        case .writingDirections(let directions): return directions
+        case .custom(_, let value): return value
+        default:
+            fatalError("No value found for attribute \(self)")
         }
-
-        return ret
     }
 
     /// The value that is passed into the original attribute dictionary of Foundation's API for NSAttributedStrings. Consists of basic types such as Int, Color, Font, etc.

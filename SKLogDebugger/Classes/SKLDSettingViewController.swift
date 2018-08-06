@@ -31,12 +31,13 @@ class SKLDSwitchCell: UITableViewCell {
 class SKLDSettingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var omitActions = Variable<[String]>([])
+    let omitActionsObserver = PublishSubject<[String]>()
+    var omitActions: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "設定"
+        navigationItem.title = "ログデバッガーの設定"
         
         let closeButton = UIBarButtonItem(barButtonSystemItem: .stop,
                                           target: self,
@@ -44,7 +45,7 @@ class SKLDSettingViewController: UIViewController {
         navigationItem.rightBarButtonItem = closeButton
     }
     
-    func onPushCloseButton(sender: UIBarButtonItem) {
+    @objc func onPushCloseButton(sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
         SKLogDebugger.shared.showTrackView()
     }
@@ -62,25 +63,34 @@ extension SKLDSettingViewController: UITableViewDataSource, UITableViewDelegate 
         case Section.debug.rawValue:
             rows = 1
         case Section.omitAction.rawValue:
-            rows = omitActions.value.count
+            rows = omitActions.count
         default:
             rows = 0
         }
         return rows
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case Section.omitAction.rawValue:
+            return "非表示にしたいログ"
+        default:
+            return nil
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SKLDSwitchCell") as! SKLDSwitchCell
         switch indexPath.section {
         case Section.debug.rawValue:
-            cell.textLabel?.text = "デバッグモード"
+            cell.textLabel?.text = "ログデバッグを有効にする"
             cell.switchView.isOn = SKLDDefaults.isDebugMode.getBool()
             cell.switchView.rx.isOn.subscribe(onNext: { isOn in
                 SKLDDefaults.isDebugMode.set(isOn)
-            }).addDisposableTo(cell.disposeBag)
+            }).disposed(by: cell.disposeBag)
         case Section.omitAction.rawValue:
-            let omitAction = omitActions.value[indexPath.row]
-            cell.textLabel?.text = "「\(omitAction)」を非表示"
+            let omitAction = omitActions[indexPath.row]
+            cell.textLabel?.text = omitAction
             cell.switchView.isOn = SKLDDefaults.validOmitActions.getStrings().contains(omitAction)
             cell.switchView.rx.isOn.subscribe(onNext: { isOn in
                 var validOmitActions = SKLDDefaults.validOmitActions.getStrings()
@@ -90,8 +100,9 @@ extension SKLDSettingViewController: UITableViewDataSource, UITableViewDelegate 
                     validOmitActions = validOmitActions.filter({ $0 != omitAction })
                 }
                 SKLDDefaults.validOmitActions.set(validOmitActions)
-                SKLogDebugger.shared.validOmitActions.value = validOmitActions
-            }).addDisposableTo(cell.disposeBag)
+                SKLogDebugger.shared.validOmitActions = validOmitActions
+                SKLogDebugger.shared.logsObserver.onNext((logs: [], omitActions: validOmitActions))
+            }).disposed(by: cell.disposeBag)
         default:
             cell.textLabel?.text = nil
         }

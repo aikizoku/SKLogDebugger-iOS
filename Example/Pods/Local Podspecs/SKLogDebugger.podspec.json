@@ -1,6 +1,6 @@
 {
   "name": "SKLogDebugger",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "summary": "This is Saikyo.",
   "description": "Saikyo log debugger.",
   "homepage": "https://github.com/aikizoku/SKLogDebugger-iOS",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/aikizoku/SKLogDebugger-iOS.git",
-    "tag": "0.0.1"
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -27,10 +27,10 @@
   "frameworks": "UIKit",
   "dependencies": {
     "RxSwift": [
-      "~> 3.0"
+      "~> 4.0"
     ],
     "RxCocoa": [
-      "~> 3.0"
+      "~> 4.0"
     ],
     "SwiftyJSON": [
 

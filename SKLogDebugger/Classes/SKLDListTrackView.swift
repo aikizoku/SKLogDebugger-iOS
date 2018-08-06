@@ -47,19 +47,15 @@ class SKLDListTrackView: UIView {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-        Observable.combineLatest(
-            SKLogDebugger.shared.logs.asObservable(),
-            SKLogDebugger.shared.validOmitActions.asObservable()
-            ).subscribe(onNext: { [weak self] (logs, validOmitActions) in
-                guard let `self` = self else { return }
-                var showLogs: [SKLDLog] = logs
-                if validOmitActions.count > 0 {
-                    showLogs = showLogs.filter({ !validOmitActions.contains($0.action) })
-                }
-                self.logs = showLogs
-                // self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                self.tableView.reloadData()
-            }).addDisposableTo(disposeBag)
+        SKLogDebugger.shared.logsObserver.subscribe(onNext: { [weak self] (logs, omitActions) in
+            guard let `self` = self else { return }
+            var showLogs: [SKLDLog] = logs
+            if omitActions.count > 0 {
+                showLogs = showLogs.filter({ !omitActions.contains($0.action) })
+            }
+            self.logs = showLogs
+            self.tableView.reloadData()
+        }).disposed(by: disposeBag)
     }
     
     override func awakeFromNib() {
