@@ -2,6 +2,7 @@
   "name": "SKLogDebugger",
   "version": "1.0.0",
   "summary": "This is Saikyo.",
+  "swift_version": "4.1",
   "description": "Saikyo log debugger.",
   "homepage": "https://github.com/aikizoku/SKLogDebugger-iOS",
   "license": {
@@ -15,6 +16,7 @@
     "git": "https://github.com/aikizoku/SKLogDebugger-iOS.git",
     "tag": "1.0.0"
   },
+  "social_media_url": "https://twitter.com/aikizoku",
   "platforms": {
     "ios": "9.0"
   },
