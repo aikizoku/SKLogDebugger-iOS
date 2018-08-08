@@ -64,9 +64,14 @@ Set omit actions.
 SKLogDebugger.shared.setOmitActions(["action_2", "action_3"])
 ```
 
+Set PrentViewController
+```swift
+SKLogDebugger.shared.setParentViewController(myViewController)
+```
+
 ## Requirements
 
-Swift3
+Swift4
 
 RxSwift, RxCocoa, SwiftyJSON, SwiftyAttributes
 
