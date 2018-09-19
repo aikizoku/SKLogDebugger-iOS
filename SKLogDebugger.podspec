@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SKLogDebugger'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'This is Saikyo.'
-  s.swift_version    = '4.1'
+  s.swift_version    = '4.2'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,7 +28,7 @@ Saikyo log debugger.
   s.source           = { :git => 'https://github.com/aikizoku/SKLogDebugger-iOS.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/aikizoku'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'SKLogDebugger/Classes/**/*'
   

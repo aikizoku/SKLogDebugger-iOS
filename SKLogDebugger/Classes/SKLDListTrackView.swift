@@ -44,7 +44,7 @@ class SKLDListTrackView: UIView {
         
         tableView.register(UINib(nibName: kSKLDListCellName, bundle: Bundle.skld()), forCellReuseIdentifier: kSKLDListCellName)
         tableView.estimatedRowHeight = 150
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         SKLogDebugger.shared.logsObserver.subscribe(onNext: { [weak self] (logs, omitActions) in
