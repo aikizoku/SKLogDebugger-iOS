@@ -29,10 +29,10 @@
   "frameworks": "UIKit",
   "dependencies": {
     "RxSwift": [
-      "~> 5.0"
+      "~> 4.0"
     ],
     "RxCocoa": [
-      "~> 5.0"
+      "~> 4.0"
     ],
     "SwiftyJSON": [
 

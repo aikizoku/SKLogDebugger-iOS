@@ -37,8 +37,8 @@ Saikyo log debugger.
   }
 
   s.frameworks = 'UIKit'
-  s.dependency 'RxSwift', '~> 5.0'
-  s.dependency 'RxCocoa', '~> 5.0'
+  s.dependency 'RxSwift', '~> 4.0'
+  s.dependency 'RxCocoa', '~> 4.0'
   s.dependency 'SwiftyJSON'
   s.dependency 'SwiftyAttributes'
 end
