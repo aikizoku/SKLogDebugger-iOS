@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     // ログ（文字列）を追加する
     @IBAction func onPushAddStringLog1(_ sender: UIButton) {
         SKLogDebugger.shared.addLog(
-            action: "action_omit_1",
+            action: "action_string_1",
             string: "string log 1"
         )
     }
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     // ログ（文字列）を追加する
     @IBAction func onPushAddStringLog2(_ sender: UIButton) {
         SKLogDebugger.shared.addLog(
-            action: "action_omit_2",
+            action: "action_string_2",
             string: "string log 2"
         )
     }
