@@ -152,7 +152,11 @@ extension SKLogDebugger {
         if let parentViewController = parentViewController {
             return parentViewController
         } else {
-            return UIApplication.shared.keyWindow?.rootViewController
+            var topViewController = UIApplication.shared.keyWindow?.rootViewController
+            while let presentedViewController = topViewController?.presentedViewController {
+                topViewController = presentedViewController
+            }
+            return topViewController
         }
     }
 }
