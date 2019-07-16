@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SKLogDebugger'
-  s.version          = '1.1.0'
+  s.version          = '1.2.0'
   s.summary          = 'This is Saikyo.'
-  s.swift_version    = '4.2'
+  s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?

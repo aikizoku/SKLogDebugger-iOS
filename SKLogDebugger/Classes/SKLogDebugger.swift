@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 public class SKLogDebugger {
     public static let shared = SKLogDebugger()
@@ -32,6 +33,10 @@ public class SKLogDebugger {
     }
     
     public func addLog(action: String, data: [String: Any]) {
+        addLog(action: action, string: JSON(data).rawString() ?? "")
+    }
+    
+    public func addLog(action: String, string: String) {
         DispatchQueue.global(qos: .default).async { [weak self] in
             guard let `self` = self else { return }
             self.addLogMutex.lock()
@@ -46,7 +51,7 @@ public class SKLogDebugger {
             
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
-                self.logs.insert(SKLDLog(action: action, data: data), at: 0)
+                self.logs.insert(SKLDLog(action: action, string: string), at: 0)
                 self.logsObserver.onNext((logs: self.logs, omitActions: self.validOmitActions))
             }
         }
@@ -147,7 +152,11 @@ extension SKLogDebugger {
         if let parentViewController = parentViewController {
             return parentViewController
         } else {
-            return UIApplication.shared.keyWindow?.rootViewController
+            var topViewController = UIApplication.shared.keyWindow?.rootViewController
+            while let presentedViewController = topViewController?.presentedViewController {
+                topViewController = presentedViewController
+            }
+            return topViewController
         }
     }
 }

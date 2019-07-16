@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class SKLDLog: NSObject {
     var action = ""
@@ -16,7 +15,7 @@ class SKLDLog: NSObject {
     var rawString = ""
     var index = ""
     
-    init(action: String, data: [String: Any]) {
+    init(action: String, string: String) {
         self.action = action
         
         let df = DateFormatter()
@@ -24,7 +23,7 @@ class SKLDLog: NSObject {
         df.dateFormat = "HH:mm:ss.SSSS"
         createdAt = df.string(from: Date())
         
-        rawString = JSON(data).rawString() ?? ""
+        rawString = string
         
         index = "\(action)::\(rawString)"
     }
